@@ -19,6 +19,10 @@ def post_question():
 def who_am_i():
     return render_template("who-am-i.html")
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
 if __name__ == '__main__':
     app.run()
     

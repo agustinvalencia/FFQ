@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form>
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" />
+  </div>
+  <div class="mb-3 form-check">
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<div class="hstack justify-content-center align-self-center">
+  <p class="lead"> Not a user yet? </p>
+  <a class="btn btn-link" href="/" role="button">
+    Sign up
+  </a>
+</div>
+</div>
+
+{% endblock content %}
