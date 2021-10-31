@@ -1,28 +1,27 @@
-from flask import Flask, render_template
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from views import views
 
 app = Flask(__name__)
+app.register_blueprint(views, url_prefix="/")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.sqlite3"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.debug = True
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+db = SQLAlchemy(app)
 
-@app.route("/get-question")
-def get_question():
-    return render_template("get-question.html")
+class users(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    name = db.Column("name", db.String(128))
+    email = db.Column("email", db.String(128))
 
-@app.route("/post-question")
-def post_question():
-    return render_template("post-question.html")
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
 
-@app.route("/who-am-i")
-def who_am_i():
-    return render_template("who-am-i.html")
-
-@app.route("/login")
-def login():
-    return render_template("login.html")
 
 if __name__ == '__main__':
+    db.create_all()
     app.run()
     
