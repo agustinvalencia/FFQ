@@ -4,8 +4,8 @@ Friday Fun Question
 
 ### Dependencies
 
-- Flask
-- SQLAlchemy
+- flask
+- flask-sqlalchemy
 
 ### Todos 
 
