@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Thanks for contributing!</h1>
+
+<p class="lead">
+    Author = {{ author }}
+    <br /><br />
+    Question = {{ question }}
+</p>
+
+
+<a class="btn btn-primary btn-lg" href="/post-question" role="button">Submit another question</a>
+
+{% endblock content %}
