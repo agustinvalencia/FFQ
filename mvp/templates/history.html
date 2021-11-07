@@ -3,7 +3,9 @@
   <div class="container">
     <h1 class="display-4">Previous Questions</h1>
     <p></p>
-    <h3>Create Table</h3>
+    {% for question in questions %}
+    <h4>{{ question.text }}</h4>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

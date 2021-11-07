@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask import render_template, redirect, request
 from flask.helpers import url_for
+from models import Question, db
 
 views = Blueprint(__name__,"views")
 
@@ -14,7 +15,20 @@ def get_question():
 
 @views.route("/post-question", methods=['GET', 'POST'])
 def post_question():
-    return render_template('post-question.html')
+    if request.method == 'POST':
+        # receiving a question
+        new_question = Question(author=request.form.get('author'),
+                                text=request.form.get('question'))
+        # Push to DB
+        try:
+            db.session.add(new_question)
+            db.session.commit()
+            return redirect('/post-question')
+        except:
+            return "There was a problem with your question"
+    else:
+        # normal landing
+        return render_template('post-question.html')
 
 @views.route("/thanks", methods=['POST'])
 def thanks():
@@ -24,6 +38,7 @@ def thanks():
                             author=author,
                             question=question)
 
-@views.route("/history")
+@views.route("/history", methods=['GET'])
 def history():
-    return render_template("history.html")
+    questions = Question.query.order_by(Question.date_created)
+    return render_template("history.html", questions=questions)

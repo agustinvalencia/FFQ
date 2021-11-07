@@ -1,10 +1,11 @@
 from app import db
+from datetime import datetime
 
-class users(db.Model):
-    _id = db.Column(db.Integer, primary_key=True)
-    name = db.Column("name", db.String(128))
-    email = db.Column("email", db.String(128))
+class Question():
+    id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    author = db.Column(db.Text, nullable=False)
+    text = db.Column(db.Text, nullable=False)
 
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
+    def __repr__(self):
+        return f'<Question {id}> {self.author}'
